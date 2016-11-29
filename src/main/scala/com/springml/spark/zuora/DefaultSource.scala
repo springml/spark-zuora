@@ -1,5 +1,6 @@
 package com.springml.spark.zuora
 
+import com.springml.spark.zuora.model.ZuoraInput
 import org.apache.log4j.Logger
 import org.apache.spark.sql.{DataFrame, SQLContext, SaveMode}
 import org.apache.spark.sql.sources.{BaseRelation, CreatableRelationProvider, RelationProvider, SchemaRelationProvider}
@@ -21,7 +22,7 @@ class DefaultSource extends RelationProvider with SchemaRelationProvider with Cr
   override def createRelation(sqlContext: SQLContext,
                               parameters: Map[String, String],
                               schema: StructType): BaseRelation = {
-    val username = param(parameters, "email")
+    val email = param(parameters, "email")
     val password = param(parameters, "password")
     val zoql = param(parameters, "zoql")
     val instanceUrl = parameters.getOrElse("instanceURL", "https://rest.zuora.com")
@@ -35,7 +36,7 @@ class DefaultSource extends RelationProvider with SchemaRelationProvider with Cr
 //      sys.error("Invalid pageSize option. Maximum supported pageSize is 1000")
 //    }
 
-//    val netSuiteInput = new NetSuiteInput(username, password, account, role, applicationId, request, pageSize)
+      val zuoraInput = new ZuoraInput(email, password, zoql, instanceUrl, apiVersion, 100)
 //    val xPathInput = new XPathInput(recordTagPath)
 //    xPathInput.xpathMap = CSVUtil.readCSV(xpath)
 //    xPathInput.namespaceMap = CSVUtil.readCSV(namespacePrefix.get)

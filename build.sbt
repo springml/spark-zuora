@@ -1,3 +1,4 @@
+
 name := "spark-zuora"
 version := "1.0.0"
 organization := "com.springml"
@@ -16,6 +17,8 @@ libraryDependencies ++= Seq(
   "org.mockito" % "mockito-core" % "2.1.0-RC.1",
   "org.scalatest" %% "scalatest" % "2.2.1" % "test"
 )
+
+libraryDependencies += "org.springframework.ws" % "spring-ws-core" % "2.3.0.RELEASE"
 
 parallelExecution in Test := false
 
