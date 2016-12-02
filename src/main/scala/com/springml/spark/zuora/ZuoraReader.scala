@@ -2,8 +2,12 @@ package com.springml.spark.zuora
 
 import com.springml.spark.zuora.model.ZuoraInput
 import com.springml.spark.zuora.util.XercesWarningFilter
-
+import com.springml.spark.zuora.ws.ZuoraClient
 import org.apache.log4j.Logger
+
+import scala.collection.immutable.Seq
+import scala.collection.mutable
+import scala.xml.{Elem, Node, XML}
 
 /**
   * Created by sam on 29/11/16.
@@ -17,18 +21,55 @@ class ZuoraReader(
     XercesWarningFilter.start()
     var records :List[scala.collection.mutable.Map[String, String]] = List.empty
 
-    val nsClient = new NetSuiteClient(netSuiteInput)
-    val response = nsClient.search()
-    records ++= readRecords(response)
+    val zuoraClient = new ZuoraClient(zuoraInput)
+    val sessionId = zuoraClient.login
 
-    val searchId = getSearchId(response)
-    while (moreToRead(response)) {
+    var currentPage = 1
+    logger.info("Reading page " + currentPage)
+    val response = zuoraClient.query(sessionId)
+    var responseXml = XML.loadString(response)
+    records ++= readRecords(responseXml)
+
+    //    val searchId = getSearchId(response)
+    while (moreToRead(responseXml)) {
       currentPage += 1
       logger.info("Reading page " + currentPage)
-      val searchMoreResponse = nsClient.searchMoreWithId(searchId, currentPage)
-      records ++= readRecords(searchMoreResponse)
+      val searchMoreResponse = zuoraClient.queryMore(sessionId, queryLocator(responseXml))
+      responseXml = XML.loadString(searchMoreResponse)
+      records ++= readRecords(responseXml)
     }
 
     records
+  }
+
+
+  private def queryLocator(responseXml: Elem): String = {
+    val queryLocElem = responseXml \ "result" \ "queryLocator"
+
+    queryLocElem.text
+  }
+
+  private def moreToRead(responseXml: Elem): Boolean = {
+    val doneElem = responseXml \ "result" \ "done"
+
+    doneElem.text.toBoolean
+  }
+
+  private def readRecords(responseXml: Elem): Seq[mutable.Map[String, String]] = {
+    val recordsXML = responseXml \ "result" \ "records"
+
+    recordsXML.map(node => record(node))
+  }
+
+  private def record(result: Node): scala.collection.mutable.Map[String, String] = {
+    val values = result.child
+    val record = scala.collection.mutable.Map.empty[String, String]
+    values.foreach(elem => {
+      if (elem.label != null && !elem.label.isEmpty && !elem.label.contains("PCDATA")) {
+        record(elem.label) = elem.text
+      }
+    })
+
+    record
   }
 }

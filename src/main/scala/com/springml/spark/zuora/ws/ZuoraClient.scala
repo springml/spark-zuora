@@ -9,7 +9,8 @@ import com.springml.spark.zuora.xml.ZuoraElement
 import org.apache.log4j.Logger
 import org.springframework.ws.client.core.WebServiceTemplate
 
-import scala.xml.XML
+import scala.collection.GenTraversableOnce
+import scala.xml.{Node, XML}
 
 /**
   * Created by sam on 29/11/16.
@@ -40,14 +41,15 @@ class ZuoraClient(
 
   private def sessionId(response : String): String = {
     val responseXml = XML.loadString(response)
+    val seq = (responseXml \ "result" \ "Session")
     (responseXml \ "result" \ "Session") text
   }
 
   private def queryMoreRequest(queryLocator: String): String = {
-    val queryLocator = ZuoraElement(Constants.PREFIX, Constants.ELEM_QUERY_LOCATOR,
+    val queryLocatorElem = ZuoraElement(Constants.PREFIX, Constants.ELEM_QUERY_LOCATOR,
       Constants.NAMESPACE, queryLocator, null)
     val queryMore = ZuoraElement(Constants.PREFIX, Constants.ELEM_QUERY_MORE,
-      Constants.NAMESPACE, null, List(queryLocator))
+      Constants.NAMESPACE, null, List(queryLocatorElem))
 
     queryMore.toString
   }
