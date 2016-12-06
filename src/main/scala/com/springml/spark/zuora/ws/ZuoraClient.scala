@@ -77,24 +77,25 @@ class ZuoraClient(
 
   private def webServiceTemplate : WebServiceTemplate = {
     val webServiceTemplate = new WebServiceTemplate
+    logger.info("Zuora Endpoint : " + defaultUri)
     webServiceTemplate.setDefaultUri(defaultUri)
 
     webServiceTemplate
   }
 
   private def defaultUri: String = {
-    zuoraInput.instanceUrl + "apps/services/a/" + zuoraInput.apiVersion
+    zuoraInput.instanceUrl + "/apps/services/a/" + zuoraInput.apiVersion
   }
 
   private def execute(soapHeaderHandler: SoapHeaderHandler, request : String) : String = {
-    logger.debug("Request : " + request)
+    logger.info("Request : " + request)
     val source = new StreamSource(new StringReader(request))
     val writer = new StringWriter
     val streamResult = new StreamResult(writer)
     webServiceTemplate.sendSourceAndReceiveToResult(source, soapHeaderHandler, streamResult)
 
     val response = writer.toString
-    logger.debug("Response : " + response)
+    logger.info("Response : " + response)
 
     return response
   }

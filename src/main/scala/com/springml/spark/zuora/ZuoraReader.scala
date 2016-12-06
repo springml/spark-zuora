@@ -22,7 +22,9 @@ class ZuoraReader(
     var records :List[scala.collection.mutable.Map[String, String]] = List.empty
 
     val zuoraClient = new ZuoraClient(zuoraInput)
+    logger.info("Login into Zuora API using provided credentials")
     val sessionId = zuoraClient.login
+    logger.info("Session ID : "  + sessionId)
 
     var currentPage = 1
     logger.info("Reading page " + currentPage)
@@ -52,7 +54,7 @@ class ZuoraReader(
   private def moreToRead(responseXml: Elem): Boolean = {
     val doneElem = responseXml \ "result" \ "done"
 
-    doneElem.text.toBoolean
+    !doneElem.text.toBoolean
   }
 
   private def readRecords(responseXml: Elem): Seq[mutable.Map[String, String]] = {

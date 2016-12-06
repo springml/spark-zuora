@@ -26,7 +26,7 @@ class DefaultSource extends RelationProvider with SchemaRelationProvider with Cr
     val password = param(parameters, "password")
     val zoql = param(parameters, "zoql")
     val instanceUrl = parameters.getOrElse("instanceURL", "https://rest.zuora.com")
-    val apiVersion = parameters.getOrElse("apiVersion", "v1")
+    val apiVersion = parameters.getOrElse("apiVersion", "38.0")
 
     // TODO
 //    val pageSizeParam = parameters.getOrElse("pageSize", "100")
@@ -36,14 +36,9 @@ class DefaultSource extends RelationProvider with SchemaRelationProvider with Cr
 //      sys.error("Invalid pageSize option. Maximum supported pageSize is 1000")
 //    }
 
-      val zuoraInput = new ZuoraInput(email, password, zoql, instanceUrl, apiVersion, 100)
-//    val xPathInput = new XPathInput(recordTagPath)
-//    xPathInput.xpathMap = CSVUtil.readCSV(xpath)
-//    xPathInput.namespaceMap = CSVUtil.readCSV(namespacePrefix.get)
-//    logger.debug("Namespace Map" + xPathInput.namespaceMap)
-//
-//    val records = new NetSuiteReader(netSuiteInput, xPathInput) read()
-    val records : List[mutable.Map[String, String]] = null
+    val zuoraInput = new ZuoraInput(email, password, zoql, instanceUrl, apiVersion, 100)
+
+    val records = new ZuoraReader(zuoraInput) read()
     new DatasetRelation(records, sqlContext, schema)
   }
 
@@ -51,14 +46,14 @@ class DefaultSource extends RelationProvider with SchemaRelationProvider with Cr
                               mode: SaveMode,
                               parameters: Map[String, String],
                               data: DataFrame): BaseRelation = {
-    logger.error("Save not supported by netsuite connector")
+    logger.error("Save not supported by Zuora connector")
     throw new UnsupportedOperationException
   }
 
   private def param(parameters: Map[String, String],
                     paramName: String) : String = {
     val paramValue = parameters.getOrElse(paramName,
-      sys.error(s"""'$paramName' must be specified for Spark NetSuite package"""))
+      sys.error(s"""'$paramName' must be specified for Spark Zuora package"""))
 
     if ("password".equals(paramName)) {
       logger.debug("Param " + paramName + " value " + paramValue)
