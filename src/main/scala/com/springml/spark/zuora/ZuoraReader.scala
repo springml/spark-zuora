@@ -22,9 +22,8 @@ class ZuoraReader(
     var records :List[scala.collection.mutable.Map[String, String]] = List.empty
 
     val zuoraClient = new ZuoraClient(zuoraInput)
-    logger.info("Login into Zuora API using provided credentials")
+    logger.debug("Login into Zuora API using provided credentials")
     val sessionId = zuoraClient.login
-    logger.info("Session ID : "  + sessionId)
 
     var currentPage = 1
     logger.info("Reading page " + currentPage)

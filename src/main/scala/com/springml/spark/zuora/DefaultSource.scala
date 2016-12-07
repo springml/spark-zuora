@@ -29,14 +29,10 @@ class DefaultSource extends RelationProvider with SchemaRelationProvider with Cr
     val apiVersion = parameters.getOrElse("apiVersion", "38.0")
 
     // TODO
-//    val pageSizeParam = parameters.getOrElse("pageSize", "100")
-//    val pageSize = pageSizeParam.toInt
-//
-//    if (pageSize > 1000) {
-//      sys.error("Invalid pageSize option. Maximum supported pageSize is 1000")
-//    }
+    val pageSizeParam = parameters.getOrElse("pageSize", "100")
+    val pageSize = pageSizeParam.toInt
 
-    val zuoraInput = new ZuoraInput(email, password, zoql, instanceUrl, apiVersion, 100)
+    val zuoraInput = new ZuoraInput(email, password, zoql, instanceUrl, apiVersion, pageSize)
 
     val records = new ZuoraReader(zuoraInput) read()
     new DatasetRelation(records, sqlContext, schema)
