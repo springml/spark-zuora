@@ -9,8 +9,7 @@ import com.springml.spark.zuora.xml.ZuoraElement
 import org.apache.log4j.Logger
 import org.springframework.ws.client.core.WebServiceTemplate
 
-import scala.collection.GenTraversableOnce
-import scala.xml.{Node, XML}
+import scala.xml.XML
 
 /**
   * Created by sam on 29/11/16.
@@ -39,13 +38,13 @@ class ZuoraClient(
     response
   }
 
-  private def sessionId(response : String): String = {
+  def sessionId(response : String): String = {
     val responseXml = XML.loadString(response)
     val seq = (responseXml \ "result" \ "Session")
     (responseXml \ "result" \ "Session") text
   }
 
-  private def queryMoreRequest(queryLocator: String): String = {
+  def queryMoreRequest(queryLocator: String): String = {
     val queryLocatorElem = ZuoraElement(Constants.PREFIX, Constants.ELEM_QUERY_LOCATOR,
       Constants.NAMESPACE, queryLocator, null)
     val queryMore = ZuoraElement(Constants.PREFIX, Constants.ELEM_QUERY_MORE,
@@ -54,7 +53,7 @@ class ZuoraClient(
     queryMore.toString
   }
 
-  private def queryRequest: String = {
+  def queryRequest: String = {
     val queryString = ZuoraElement(Constants.PREFIX, Constants.ELEM_QUERY_STRING,
       Constants.NAMESPACE, zuoraInput.zoql, null)
     val query = ZuoraElement(Constants.PREFIX, Constants.ELEM_QUERY,
@@ -63,7 +62,7 @@ class ZuoraClient(
     query.toString
   }
 
-  private def loginRequest: String = {
+  def loginRequest: String = {
     val username = ZuoraElement(Constants.PREFIX, Constants.ELEM_USERNAME,
       Constants.NAMESPACE, zuoraInput.email, null)
     val password = ZuoraElement(Constants.PREFIX, Constants.ELEM_PASSWORD,
@@ -75,7 +74,7 @@ class ZuoraClient(
     login.toString
   }
 
-  private def webServiceTemplate : WebServiceTemplate = {
+  def webServiceTemplate : WebServiceTemplate = {
     val webServiceTemplate = new WebServiceTemplate
     logger.info("Zuora Endpoint : " + defaultUri)
     webServiceTemplate.setDefaultUri(defaultUri)

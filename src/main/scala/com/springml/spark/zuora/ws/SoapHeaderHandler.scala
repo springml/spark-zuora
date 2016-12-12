@@ -28,7 +28,7 @@ class SoapHeaderHandler(
     transformer.transform(new StringSource(sessionHeader), soapHeader.getResult)
   }
 
-  private def sessionHeader: String = {
+  def queryOptions: String = {
     val batchSize = ZuoraElement(Constants.PREFIX, Constants.ELEM_BATCH_SIZE,
       Constants.NAMESPACE, zuoraInput.pageSize.toString, null)
     // TODO - Do we need to get this as option?
@@ -44,7 +44,7 @@ class SoapHeaderHandler(
     queryOptions.toString()
   }
 
-  private def queryOptions: String = {
+  def sessionHeader: String = {
     val session = ZuoraElement(Constants.PREFIX, Constants.ELEM_SESSION,
       Constants.NAMESPACE, sessionId, null)
 

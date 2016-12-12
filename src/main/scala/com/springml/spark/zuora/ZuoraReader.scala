@@ -43,20 +43,19 @@ class ZuoraReader(
     records
   }
 
-
-  private def queryLocator(responseXml: Elem): String = {
+  def queryLocator(responseXml: Elem): String = {
     val queryLocElem = responseXml \ "result" \ "queryLocator"
 
     queryLocElem.text
   }
 
-  private def moreToRead(responseXml: Elem): Boolean = {
+  def moreToRead(responseXml: Elem): Boolean = {
     val doneElem = responseXml \ "result" \ "done"
 
     !doneElem.text.toBoolean
   }
 
-  private def readRecords(responseXml: Elem): Seq[mutable.Map[String, String]] = {
+  def readRecords(responseXml: Elem): Seq[mutable.Map[String, String]] = {
     val recordsXML = responseXml \ "result" \ "records"
 
     recordsXML.map(node => record(node))
