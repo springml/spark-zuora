@@ -35,9 +35,9 @@ assemblyMergeStrategy in assembly := {
 // Maven Details
 publishMavenStyle := true
 spIncludeMaven := true
-spShortDescription := "Spark NetSuite Connector"
-spDescription := """Spark NetSuite Connector
-                   | - Creates dataframe using data fetched from NetSuite Web services """.stripMargin
+spShortDescription := "Spark Zuora Connector"
+spDescription := """Spark Zuora Connector
+                   | - Creates dataframe using data fetched from Zuora by executing ZOQL""".stripMargin
 
 // licenses += "Apache-2.0" -> url("http://opensource.org/licenses/Apache-2.0")
 credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
