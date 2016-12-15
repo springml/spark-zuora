@@ -37,8 +37,8 @@ $ bin/spark-shell --packages com.springml:spark-zuora_2.10:1.0.0
 * `email`: Zuora account user Id
 * `password`: Zuora account password
 * `instanceURL`: Zuora Instance URL. Like, https://api.zuora.com. Possible values are listed [here](https://knowledgecenter.zuora.com/DC_Developers/REST_API/A_REST_basics#URLS_and_Endpoints)
-* `pageSize`: (Optional) Number of records to pulled in a single request. Max pageSze is 2000. Default value is `1000`.
 * `zoql`: ZOQL to be executed to fetch records from Zuora. Example, ```select AccountId, FirstName, LastName from contact```. More details on ZOQL can be found [here](https://knowledgecenter.zuora.com/DC_Developers/SOAP_API/M_Zuora_Object_Query_Language)
+* `pageSize`: (Optional) Number of records to pulled in a single request. Max value for pageSize is `2000`. Default value is `1000`.
 * `schema`: (Optional) Schema to be used for constructing dataframes. If not provided all fields will be of type String
 
 ### Scala API
