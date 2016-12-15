@@ -1,6 +1,6 @@
 # Spark Zuora Library
 
-A Library to fetch data from Zuora and construct Spark dataframe. This library executes [ZOQL|https://knowledgecenter.zuora.com/DC_Developers/SOAP_API/M_Zuora_Object_Query_Language] using [Zuora REST API|https://knowledgecenter.zuora.com/DC_Developers/REST_API] to fetch data from Zuora
+A Library to fetch data from Zuora and construct Spark dataframe. This library executes [ZOQL](https://knowledgecenter.zuora.com/DC_Developers/SOAP_API/M_Zuora_Object_Query_Language) using [Zuora REST API](https://knowledgecenter.zuora.com/DC_Developers/REST_API) to fetch data from Zuora
 
 ## Requirements
 
@@ -31,14 +31,14 @@ $ bin/spark-shell --packages com.springml:spark-zuora_2.10:1.0.0
 ```
 
 ## Feature
-* **Construct Spark Dataframe using Zuora data** - User has to provide ZOQL (Zuora Object Query Language). ZOQL will be executed using Zuora REST API. It uses [Query action|https://www.zuora.com/developer/api-reference/] to execute ZOQL. And further records are accessed using [QueryMore Action|https://www.zuora.com/developer/api-reference/]. 
+* **Construct Spark Dataframe using Zuora data** - User has to provide ZOQL (Zuora Object Query Language). ZOQL will be executed using Zuora REST API. It uses [Query action](https://www.zuora.com/developer/api-reference/) to execute ZOQL. And further records are accessed using [QueryMore Action](https://www.zuora.com/developer/api-reference/). 
 
 ### Options
 * `email`: Zuora account user Id
 * `password`: Zuora account password
-* `instanceURL`: Zuora Instance URL. Like, https://api.zuora.com. Possible values are listed [here|https://knowledgecenter.zuora.com/DC_Developers/REST_API/A_REST_basics#URLS_and_Endpoints]
+* `instanceURL`: Zuora Instance URL. Like, https://api.zuora.com. Possible values are listed [here](https://knowledgecenter.zuora.com/DC_Developers/REST_API/A_REST_basics#URLS_and_Endpoints)
 * `pageSize`: (Optional) Number of records to pulled in a single request. Max pageSze is 2000. Default value is `1000`.
-* `zoql`: ZOQL to be executed to fetch records from Zuora. Example, ```select AccountId, FirstName, LastName from contact```. More details on ZOQL can be found [here|https://knowledgecenter.zuora.com/DC_Developers/SOAP_API/M_Zuora_Object_Query_Language]
+* `zoql`: ZOQL to be executed to fetch records from Zuora. Example, ```select AccountId, FirstName, LastName from contact```. More details on ZOQL can be found [here](https://knowledgecenter.zuora.com/DC_Developers/SOAP_API/M_Zuora_Object_Query_Language)
 * `schema`: (Optional) Schema to be used for constructing dataframes. If not provided all fields will be of type String
 
 ### Scala API
