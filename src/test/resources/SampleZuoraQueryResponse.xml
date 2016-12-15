@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns1:queryResponse
+        xmlns:ns1="http://api.zuora.com/"
+        xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <ns1:result>
+        <ns1:done>false</ns1:done>
+        <ns1:queryLocator>2c92c0f8586bca0801586c5adba35c73-5</ns1:queryLocator>
+        <ns1:records
+                xmlns:ns2="http://object.api.zuora.com/"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:Contact">
+            <ns2:Id>2c92c0f8585839b5015866e674db7e0d</ns2:Id>
+            <ns2:AccountId>2c92c0f8585839b9015866e672892d1b</ns2:AccountId>
+            <ns2:FirstName>Firstly1479195128550</ns2:FirstName>
+            <ns2:LastName>Secondly1479195128550</ns2:LastName>
+        </ns1:records>
+        <ns1:records
+                xmlns:ns2="http://object.api.zuora.com/"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:Contact">
+            <ns2:Id>2c92c0f9585841e6015866ce4400508e</ns2:Id>
+            <ns2:AccountId>2c92c0f858583a1b015866ce41913608</ns2:AccountId>
+            <ns2:FirstName>Firstly1479193543165</ns2:FirstName>
+            <ns2:LastName>Secondly1479193543165</ns2:LastName>
+        </ns1:records>
+        <ns1:records
+                xmlns:ns2="http://object.api.zuora.com/"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:Contact">
+            <ns2:Id>bc5914707c415ec9015246f3d5301de6</ns2:Id>
+            <ns2:AccountId>bc59526be4935a59015246f3d52c1de5</ns2:AccountId>
+            <ns2:FirstName>Heike</ns2:FirstName>
+            <ns2:LastName>Keller</ns2:LastName>
+        </ns1:records>
+        <ns1:records
+                xmlns:ns2="http://object.api.zuora.com/"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:Contact">
+            <ns2:Id>bc591e9dc3f9c2a20152462445f901c9</ns2:Id>
+            <ns2:AccountId>bc59c0dea6e320e40152462445f601c8</ns2:AccountId>
+            <ns2:FirstName>Mason</ns2:FirstName>
+            <ns2:LastName>Davis</ns2:LastName>
+        </ns1:records>
+        <ns1:records
+                xmlns:ns2="http://object.api.zuora.com/"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:Contact">
+            <ns2:Id>bc597b1f216da44c01524604551c3c69</ns2:Id>
+            <ns2:AccountId>bc59ebb11a8e57050152460455113c68</ns2:AccountId>
+            <ns2:FirstName>Gavin</ns2:FirstName>
+            <ns2:LastName>Belson</ns2:LastName>
+        </ns1:records>
+        <ns1:size>10</ns1:size>
+    </ns1:result>
+</ns1:queryResponse>

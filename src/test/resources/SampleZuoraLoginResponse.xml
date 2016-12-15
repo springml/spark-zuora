@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns1:loginResponse
+        xmlns:ns1="http://api.zuora.com/"
+        xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <ns1:result>
+        <ns1:Session>TEST_SESSION_ID</ns1:Session>
+        <ns1:ServerUrl>https://apisandbox.zuora.com/apps/services/a/38.0</ns1:ServerUrl>
+    </ns1:result>
+</ns1:loginResponse>
