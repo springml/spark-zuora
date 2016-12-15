@@ -29,7 +29,7 @@ class DefaultSource extends RelationProvider with SchemaRelationProvider with Cr
     val apiVersion = parameters.getOrElse("apiVersion", "38.0")
 
     // TODO
-    val pageSizeParam = parameters.getOrElse("pageSize", "100")
+    val pageSizeParam = parameters.getOrElse("pageSize", "1000")
     val pageSize = pageSizeParam.toInt
 
     val zuoraInput = new ZuoraInput(email, password, zoql, instanceUrl, apiVersion, pageSize)
