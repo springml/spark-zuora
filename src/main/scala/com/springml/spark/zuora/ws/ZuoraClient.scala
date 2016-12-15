@@ -87,14 +87,14 @@ class ZuoraClient(
   }
 
   private def execute(soapHeaderHandler: SoapHeaderHandler, request : String) : String = {
-    logger.info("Request : " + request)
+    logger.debug("Request : " + request)
     val source = new StreamSource(new StringReader(request))
     val writer = new StringWriter
     val streamResult = new StreamResult(writer)
     webServiceTemplate.sendSourceAndReceiveToResult(source, soapHeaderHandler, streamResult)
 
     val response = writer.toString
-    logger.info("Response : " + response)
+    logger.debug("Response : " + response)
 
     return response
   }
