@@ -4,7 +4,9 @@ A Library to fetch data from Zuora and construct Spark dataframe. This library e
 
 ## Requirements
 
-This library requires Spark 1.6+
+This library requires Spark 2.x
+
+For Spark 1.x support, please check [spark1.x](https://github.com/springml/spark-zuora/tree/spark1.x) branch.
 
 ## Linking
 You can link against this library in your program at the following ways:
@@ -13,21 +15,21 @@ You can link against this library in your program at the following ways:
 ```
 <dependency>
     <groupId>com.springml</groupId>
-    <artifactId>spark-zuora_2.10</artifactId>
-    <version>1.0.0</version>
+    <artifactId>spark-zuora_2.11</artifactId>
+    <version>1.1.0</version>
 </dependency>
 ```
 
 ### SBT Dependency
 ```
-libraryDependencies += "com.springml" % "spark-zuora_2.10" % "1.0.0"
+libraryDependencies += "com.springml" % "spark-zuora_2.11" % "1.1.0"
 ```
 
 ## Using with Spark shell
 This package can be added to Spark using the `--packages` command line option.  For example, to include it when starting the spark shell:
 
 ```
-$ bin/spark-shell --packages com.springml:spark-zuora_2.10:1.0.0
+$ bin/spark-shell --packages com.springml:spark-zuora_2.11:1.1.0
 ```
 
 ## Feature
@@ -42,17 +44,13 @@ $ bin/spark-shell --packages com.springml:spark-zuora_2.10:1.0.0
 * `schema`: (Optional) Schema to be used for constructing dataframes. If not provided all fields will be of type String
 
 ### Scala API
-Spark 1.6+:
 ```scala
-import org.apache.spark.sql.SQLContext
-
 // Construct Dataframe from Zuora records
-val sqlContext = new SQLContext(sc)
 // Here "select AccountId, FirstName, LastName from contact" is executed
 val zoql = "select AccountId, FirstName, LastName from contact"
 
 // Below constructs dataframe by executing Query and QueryMore Action 
-val df = sqlContext.read.
+val df = spark.read.
     format("com.springml.spark.zuora").
     option("email", "zuora_email").
     option("password", "zuora_password").
@@ -65,17 +63,15 @@ val df = sqlContext.read.
 
 
 ### R API
-Spark 1.6+:
 ```r
 # Construct Dataframe from Zuora records
 # Here "select AccountId, FirstName, LastName from contact" is executed
 zoql <- "select AccountId, FirstName, LastName from contact"
 
 // Below constructs dataframe by executing Query and QueryMore Action
-df <- read.df(sqlContext, 
-      source="com.springml.spark.zuora", 
-      email="zuora_email", 
-      password="zuora_password", 
+df <- read.df(source="com.springml.spark.zuora",
+      email="zuora_email",
+      password="zuora_password",
       instanceURL="https://apisandbox.zuora.com",
       pageSize="100",
       zoql=zoql)
@@ -84,4 +80,4 @@ df <- read.df(sqlContext,
 
 
 ## Building From Source
-This library is built with [SBT](http://www.scala-sbt.org/0.13/docs/Command-Line-Reference.html), which is automatically downloaded by the included shell script. To build a JAR file simply run `sbt/sbt package` from the project root. The build configuration includes support for both Scala 2.10 and 2.11.
+This library is built with [SBT](http://www.scala-sbt.org/0.13/docs/Command-Line-Reference.html), which is automatically downloaded by the included shell script. To build a JAR file simply run `sbt/sbt package` from the project root.
